@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BTL_qldientu.Models.product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pro_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pro_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pro_id })
+        </td>
+    </tr>
+}
+
+</table>

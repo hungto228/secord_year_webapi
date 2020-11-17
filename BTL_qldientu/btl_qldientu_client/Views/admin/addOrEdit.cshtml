@@ -1,0 +1,36 @@
+﻿@model btl_qldientu_client.Models.admin
+@{
+    ViewBag.Title = "addOrEdit";
+}
+<h2>add admin</h2>
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        //@Html.HiddenFor(model => model.ad_id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.ad_id)
+            @Html.EditorFor(model => model.ad_id)
+            @Html.ValidationMessageFor(model => model.ad_id)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ad_username)
+            @Html.EditorFor(model => model.ad_username)
+            @Html.ValidationMessageFor(model => model.ad_username)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ad_password)
+            @Html.EditorFor(model => model.ad_password)
+            @Html.ValidationMessageFor(model => model.ad_password)
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn button" />
+            <input type="reset" value="Reset" class="btn button" />
+        </div>
+    }
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="taikhoanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="GIABAN">
+    <Key>
+      <PropertyRef Name="MAGIABAN" />
+    </Key>
+    <Property Name="MAGIABAN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MAHANG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GIA" Type="Int32" />
+    <Property Name="DVTINH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYBD" Type="DateTime" Precision="0" />
+    <Property Name="NGAYKT" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="HANGHOA" Relationship="Self.FK_GIABAN_MAHANG" FromRole="GIABAN" ToRole="HANGHOA" />
+  </EntityType>
+  <EntityType Name="HANGHOA">
+    <Key>
+      <PropertyRef Name="MAHANG" />
+    </Key>
+    <Property Name="MAHANG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MALOAI" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TENHANG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SOLUONG" Type="Int32" />
+    <Property Name="SOLUONGCON" Type="Int32" />
+    <NavigationProperty Name="GIABANs" Relationship="Self.FK_GIABAN_MAHANG" FromRole="HANGHOA" ToRole="GIABAN" />
+    <NavigationProperty Name="LOAIHANG" Relationship="Self.FK_HANGHOA_LOAIHANG" FromRole="HANGHOA" ToRole="LOAIHANG" />
+  </EntityType>
+  <EntityType Name="LOAIHANG">
+    <Key>
+      <PropertyRef Name="MALOAI" />
+    </Key>
+    <Property Name="MALOAI" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TENLOAI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HANGHOAs" Relationship="Self.FK_HANGHOA_LOAIHANG" FromRole="LOAIHANG" ToRole="HANGHOA" />
+  </EntityType>
+  <Association Name="FK_GIABAN_MAHANG">
+    <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+    <End Role="GIABAN" Type="Self.GIABAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HANGHOA">
+        <PropertyRef Name="MAHANG" />
+      </Principal>
+      <Dependent Role="GIABAN">
+        <PropertyRef Name="MAHANG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HANGHOA_LOAIHANG">
+    <End Role="LOAIHANG" Type="Self.LOAIHANG" Multiplicity="1" />
+    <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAIHANG">
+        <PropertyRef Name="MALOAI" />
+      </Principal>
+      <Dependent Role="HANGHOA">
+        <PropertyRef Name="MALOAI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBANHANGEntities6" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="GIABANs" EntityType="Self.GIABAN" />
+    <EntitySet Name="HANGHOAs" EntityType="Self.HANGHOA" />
+    <EntitySet Name="LOAIHANGs" EntityType="Self.LOAIHANG" />
+    <AssociationSet Name="FK_GIABAN_MAHANG" Association="Self.FK_GIABAN_MAHANG">
+      <End Role="HANGHOA" EntitySet="HANGHOAs" />
+      <End Role="GIABAN" EntitySet="GIABANs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HANGHOA_LOAIHANG" Association="Self.FK_HANGHOA_LOAIHANG">
+      <End Role="LOAIHANG" EntitySet="LOAIHANGs" />
+      <End Role="HANGHOA" EntitySet="HANGHOAs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

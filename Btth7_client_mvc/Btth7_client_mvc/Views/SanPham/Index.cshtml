@@ -1,0 +1,64 @@
+﻿
+@model IEnumerable<Btth7_client_mvc.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.MaDanhMuc)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.DanhMuc)
+        </th>*@
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(model => item.Ma)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Ten)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DonGia)
+    </td>
+    @*<td>
+        @Html.DisplayFor(modelItem => item.MaDanhMuc)
+    </td>*@
+    @*<td>
+        @Html.DisplayFor(modelItem => item.DanhMuc)
+    </td>*@
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Ma }) |
+
+        @Html.ActionLink("Delete", "Delete", new { id = item.Ma })
+    </td>
+</tr>
+    }
+
+</table>
+
+

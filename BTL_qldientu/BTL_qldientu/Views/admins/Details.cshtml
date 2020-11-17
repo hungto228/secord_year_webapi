@@ -1,0 +1,34 @@
+﻿@model BTL_qldientu.Models.admin
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>admin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ad_username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ad_username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ad_password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ad_password)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ad_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

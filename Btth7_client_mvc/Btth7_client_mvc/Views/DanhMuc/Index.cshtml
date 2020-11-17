@@ -1,0 +1,108 @@
+﻿@*@model IEnumerable<Btth7_client_mvc.Models.Danhmuc>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaDanhMuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDanhMuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SanPhams)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.MaDanhMuc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenDanhMuc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SanPhams)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaDanhMuc }) |
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaDanhMuc })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+@model IEnumerable<Btth7_client_mvc.Models.SanPham>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <p>@using (Html.BeginForm("Index","DanhMuc",FormMethod.Get))
+    {
+        <b>Search by</b>@Html.RadioButton("searchby", "id",true)<text>id</text>
+        @Html.RadioButton("searchby", "name") <text> name </text>
+        @Html.TextBox("Search")<input type="submit" value="Search" />
+    }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonGia)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Ma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonGia)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaDanhMuc }) |
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaDanhMuc })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+

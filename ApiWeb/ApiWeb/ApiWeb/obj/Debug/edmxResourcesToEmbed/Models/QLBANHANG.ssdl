@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="taikhoanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="GIABAN">
+    <Key>
+      <PropertyRef Name="MAGIABAN" />
+    </Key>
+    <Property Name="MAGIABAN" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="MAHANG" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GIA" Type="int" />
+    <Property Name="DVTINH" Type="nvarchar" MaxLength="50" />
+    <Property Name="NGAYBD" Type="date" />
+    <Property Name="NGAYKT" Type="date" />
+  </EntityType>
+  <EntityType Name="HANGHOA">
+    <Key>
+      <PropertyRef Name="MAHANG" />
+    </Key>
+    <Property Name="MAHANG" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MALOAI" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TENHANG" Type="nvarchar" MaxLength="50" />
+    <Property Name="SOLUONG" Type="int" />
+    <Property Name="SOLUONGCON" Type="int" />
+  </EntityType>
+  <EntityType Name="LOAIHANG">
+    <Key>
+      <PropertyRef Name="MALOAI" />
+    </Key>
+    <Property Name="MALOAI" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TENLOAI" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MOTA" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_GIABAN_MAHANG">
+    <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+    <End Role="GIABAN" Type="Self.GIABAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HANGHOA">
+        <PropertyRef Name="MAHANG" />
+      </Principal>
+      <Dependent Role="GIABAN">
+        <PropertyRef Name="MAHANG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HANGHOA_LOAIHANG">
+    <End Role="LOAIHANG" Type="Self.LOAIHANG" Multiplicity="1" />
+    <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAIHANG">
+        <PropertyRef Name="MALOAI" />
+      </Principal>
+      <Dependent Role="HANGHOA">
+        <PropertyRef Name="MALOAI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="taikhoanModelStoreContainer">
+    <EntitySet Name="GIABAN" EntityType="Self.GIABAN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HANGHOA" EntityType="Self.HANGHOA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOAIHANG" EntityType="Self.LOAIHANG" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_GIABAN_MAHANG" Association="Self.FK_GIABAN_MAHANG">
+      <End Role="HANGHOA" EntitySet="HANGHOA" />
+      <End Role="GIABAN" EntitySet="GIABAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HANGHOA_LOAIHANG" Association="Self.FK_HANGHOA_LOAIHANG">
+      <End Role="LOAIHANG" EntitySet="LOAIHANG" />
+      <End Role="HANGHOA" EntitySet="HANGHOA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
